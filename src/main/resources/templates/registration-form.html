@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link th:replace="components :: bootstrap-css">
+</head>
+<body>
+    <div th:replace="components :: project-title"></div>
+    <div class="container border border-success p-3 mx-auto row">
+        <div class="col-10">
+            <h2>Save Employee</h2>
+            <hr class="bg-dark" style="height: 4px;">
+            <form th:action="@{/save-employee}" th:object="${employee}" method="POST">
+                <div>
+                    <label for="emp-name">Employee Name:</label>
+                    <input id="emp-name" type="text" th:field="*{name}" placeholder="Enter Employee Name" class="form-control mb-4 col-8" autofocus/>
+                </div>
+                <br>
+                <div>
+                    <label for="mobile-no">Mobile No.:</label>
+                    <input id="mobile-no" type="number" th:field="*{mobile}" placeholder="Enter 10-digit mobile number" class="form-control mb-4 col-8"/>
+                </div>
+                <br>
+                <div>
+                    <label for="emp-salary">Salary:</label>
+                    <input id="emp-salary" type="text" th:field="*{salary}" placeholder="Enter salary" class="form-control mb-4 col-8"/>
+                </div>
+                <br>
+                <div class="row">
+                    <input type="submit" value="Save" class="btn btn-success col-5 mx-3"/>
+                    <input type="reset" class="btn btn-secondary col-5"/>
+                </div>
+            </form>
+        </div>
+        <div class="container text-center col-2">
+            <div th:replace="components :: logout-btn"></div>
+            <br>
+            <a th:href="@{/dashboard}">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+    <div th:include="components :: scripts"></div>
+</html>

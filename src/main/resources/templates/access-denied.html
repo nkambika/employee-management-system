@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error: Access Denied</title>
+    <link th:replace="components :: bootstrap-css">
+</head>
+<body>
+    <div class="container mt-2 text-center alert alert-info">
+        <h1>403 - Access Denied</h1>
+        <p>You do not have permission to access this page.</p>
+    </div>
+    <div class="container text-center">
+        <a th:href="@{/dashboard}">Go to dashboard</a>
+    </div>
+</body>
+</html>

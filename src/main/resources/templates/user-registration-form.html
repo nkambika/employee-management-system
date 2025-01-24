@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management System</title>
+    <link th:replace="components :: bootstrap-css">
+    <link th:replace="components :: select2-css">
+</head>
+<body>
+<div th:replace="components :: project-title"></div>
+<!-- success message -->
+<div class="container text-center" th:if="${param.success}">
+    <div class="alert alert-info" th:text="${message}"></div>
+</div>
+<!-- Error Message -->
+<div class="container text-center" th:if="${param.error}">
+    <div class="alert alert-info">
+        Login Failed: username/ password mismatch
+    </div>
+</div>
+<!-- Create User Registration Form-->
+<div class="container my-2 p-3">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 border border-dark">
+            <h1> Registration Form</h1>
+            <hr class="bg-dark" style="height:5px">
+            <form th:action="@{/register}" method="POST" th:object="${user}">
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <input id="name" class="form-control" th:field="*{name}" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="mobile">Mobile No.</label>
+                    <input type="number" id="mobile" class="form-control" th:field="*{mobile}" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="email">Email</label>
+                    <input type="email" id="email" class="form-control" th:field="*{email}" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-control" th:field="*{password}" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="role">Role</label>
+                    <select id="role" class="form-control" th:field="*{roles}" multiple required>
+                        <option th:each="role, index : ${roles}" th:value="${role}" th:text="${role}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Register</button>
+                </div>
+            </form>
+        </div>
+        <!-- Create User Login Form -->
+        <div class="col-md-6 col-md-offset-3 border border-dark">
+            <h1>Login Form</h1>
+            <hr class="bg-dark" style="height:5px">
+            <form th:action="@{/login}" method="POST">
+                <div class="form-group">
+                    <label class="control-label" for="username">Username:</label>
+                    <input id="username" class="form-control" name="username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="credentials">Password:</label>
+                    <input id="credentials" type="password" class="form-control" name="password" required>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Login" class="btn btn-success px-4" required>
+                </div>
+            </form>
+            <div class="form-group text-center">
+                <label class="control-label" for="credentials">OR</label>
+            </div>
+            <div class="form-group">
+                <a th:href="@{/oauth2/authorization/facebook}" class="form-control btn border border-dark">
+                    <img th:src="@{/icons/login-with-facebook.png}" alt="logo"/>
+                </a>
+            </div>
+            <div class="form-group">
+                <a th:href="@{/oauth2/authorization/google}" class="form-control btn border border-dark">
+                    <img th:src="@{/icons/login-with-google.png}" alt="logo"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="components :: scripts"></div>
+<script>
+    $(document).ready(function () {
+        $('#role').select2({
+            placeholder: "Select Role",
+            allowClear: true,
+            width: '100%'
+        });
+    });
+</script>
+</html>
